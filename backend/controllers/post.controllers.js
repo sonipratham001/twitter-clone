@@ -77,6 +77,12 @@ try{
 
     post.comments.push(comment);
     await post.save();
+    const notification = new Notification({
+      from: userId,
+      to: post.user,
+      type: "comment"
+  })
+  await notification.save();
     res.status(200).json(post)
 }
 catch(error){
